@@ -1,0 +1,279 @@
+/* Stylesheet */
+
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: block;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.65em;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+pre {
+  font-family: monospace;
+  font-size: 1em;
+}
+
+a {
+  background-color: transparent;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace;
+  font-size: 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+textarea {
+  overflow: auto;
+}
+
+#highScores div div {
+  padding: 5px;
+  font-weight: 600;
+}
+
+#highScores div div:nth-child(odd) {
+  background-color: whitesmoke;
+}
+
+#highScores button {
+  margin: 5px;
+}
+
+#positionWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100% - 110px);
+}
+
+section {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+#controls {
+  background-color: rebeccapurple;
+}
+
+#info {
+  max-width: 980px;
+  margin: 0 auto;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 16px 30px;
+}
+
+#scores {
+  left: 40px;
+  background-color: darkorchid;
+  color: white;
+}
+
+#timer {
+  right: 40px;
+}
+
+#intro {
+  text-align: center;
+}
+
+button {
+  background-color: rebeccapurple;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#intro button:hover {
+  background-color: indigo;
+}
+
+#quizHolder #title {
+  font-weight: 700;
+}
+
+#quizHolder button {
+  background-color: rebeccapurple;
+  border-radius: 5px;
+  color: white;
+  margin: 3px;
+  padding: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+#quizHolder button:hover {
+  background-color: indigo;
+}
+
+#userScore p,
+#errorIndicator p {
+  margin: 0;
+  margin-top: 10px;
+}
+
+#scoreStorage input,
+#scoreStorage button {
+  margin-top: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.disable {
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 768px) {
+  #positionWrap {
+    min-height: calc(100% - 82px);
+  }
+
+  #finished #scoreStorage {
+    display: flex;
+    align-items: center;
+  }
+
+  #finished #scoreStorage input,
+  #finished #scoreStorage button {
+    margin-left: 10px;
+  }
+
+  #info {
+    flex-direction: row;
+  }
+
+  #quizHolder {
+    min-width: 420px;
+  }
+
+  #quizHolder {
+    min-width: 100%;
+  }
+}
