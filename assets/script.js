@@ -79,6 +79,48 @@ document.addEventListener("DOMContentLoaded", (event)=> {
         }
     }
 
-    
+    let clock;
+    queryElement ("#intro button").addEventListener("click", (e) => {
+        setQuestionData();
+        onlyDisplaySection("#quizHolder");
+        clock = setInterval(myTimer, 1000);
+        });
+
+    let userScore = () => {
+        clearTimeout(timeset);
+        timeset = setTimeout(() => {
+            queryElement("#userScore").classList.add("hidden");
+        }, 1000);
+    }
+
+    Array.from(answers).forEach(check => {
+        check.addEventListener("click", function (event) {
+            if (this.innerHTML.substring(3, this.length) === questions [qCount].answer) {
+                score = score + 10;
+                qCount = qCount + 10;
+                quizUpdate("Correct!");
+            } else {
+                time = time - 10;
+                qCount = qCount - 10;
+                quizUpdate("Incorrect");
+            }
+        });
+    });
+
+    queryElement("#records button").addEventListener("click", () => {
+		let initialsRecord = queryElement('#initials').value;
+		if (initialsRecord === ''){
+			recordsArray.push({
+				"initialRecord": initialsRecord,
+				"score": score
+			});
+			localStorage.setItem('recordsArray', JSON.stringify(recordsArray));
+			queryElement('#highScores div').innerHTML = '';
+			onlyDisplaySection("#highScores");
+			recordsHtmlReset();
+			queryElement("#initials").value = '';
+        }
+
+
 
 });
