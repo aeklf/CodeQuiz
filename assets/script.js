@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", (event)=> {
             userItem.classList.add("hide");
         });
         queryElement(element).classList.remove("hide");
-    } 
+    }
 
     let recordsHtmlReset = () => {
         queryElement("#highScores div").innerHTML = "";
