@@ -107,20 +107,25 @@ document.addEventListener("DOMContentLoaded", (event)=> {
         });
     });
 
-    queryElement("#records button").addEventListener("click", () => {
+    queryElement("#scoreStorage button").addEventListener("click", () => {
 		let initialsRecord = queryElement('#initials').value;
 		if (initialsRecord === ''){
 			recordsArray.push({
 				"initialRecord": initialsRecord,
 				"score": score
 			});
-			localStorage.setItem('recordsArray', JSON.stringify(recordsArray));
+			localStorage.setItem("recordsArray", JSON.stringify(recordsArray));
 			queryElement('#highScores div').innerHTML = '';
 			onlyDisplaySection("#highScores");
 			recordsHtmlReset();
 			queryElement("#initials").value = '';
         }
 
-
+        queryElement("#reset").addEventListener("click", () => {
+            time = initialTime;
+            score = 0;
+            qCount = 0;
+            onlyDisplaySection("#intro");
+        });
 
 });
