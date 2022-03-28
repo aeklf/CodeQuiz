@@ -107,14 +107,30 @@ document.addEventListener("DOMContentLoaded", (event)=> {
         });
     });
 
-    queryElement("#scoreStorage button").addEventListener("click", () => {
+    let errorIndicator = () => {
+        clearTimeout(timeset);
+        timeset = setTimeout(()=> {
+            queryElement ("#errorIndicator").classList.add("hidden");
+        }, 3000);
+    }
+
+    queryElement("#records button").addEventListener("click", () => {
 		let initialsRecord = queryElement('#initials').value;
 		if (initialsRecord === ''){
+			queryElement('#errorIndicator p').innerHTML = "You need at least 1 character";
+			queryElement('#errorIndicator').classList.remove('invisible', errorIndicator());
+		} else if (initialsRecord.match(/[[A-Za-z]/) === null) {
+			queryElement('#errorIndicator p').innerHTML = "Only letters for initials allowed.";
+			queryElement('#errorIndicator').classList.remove('invisible', errorIndicator());
+		} else if (initialsRecord.length > 5) {
+			queryElement('#errorIndicator p').innerHTML = "Maximum of 5 characters allowed.";
+			queryElement('#errorIndicator').classList.remove('invisible', errorIndicator());
+		} else {
 			recordsArray.push({
 				"initialRecord": initialsRecord,
 				"score": score
 			});
-			localStorage.setItem("recordsArray", JSON.stringify(recordsArray));
+			localStorage.setItem('recordsArray', JSON.stringify(recordsArray));
 			queryElement('#highScores div').innerHTML = '';
 			onlyDisplaySection("#highScores");
 			recordsHtmlReset();
@@ -128,5 +144,22 @@ document.addEventListener("DOMContentLoaded", (event)=> {
             onlyDisplaySection("#intro");
         });
 
+        queryElement("#reset").addEventListener("click", () => {
+            time = initialTime;
+            score = 0;
+            qCount = 0;
+            onlyDisplaySection("#intro");
+        });
+
+        queryElement("#scores").addEventListener("click", (e) => {
+            e.preventDefault();
+            clearInterval(clock);
+            queryElement('#time').innerHTML = 0;
+            time = initialTime;
+            score = 0;
+            qCount = 0;
+            onlyDisplaySection("#highScores");
+            recordsHtmlReset();
+        });
 });
 });
