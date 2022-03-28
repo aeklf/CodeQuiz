@@ -140,6 +140,19 @@ textarea {
   overflow: auto;
 }
 
+[type="checkbox"] [type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: block;
+}
+
 #highScores div div {
   padding: 5px;
   font-weight: 600;
