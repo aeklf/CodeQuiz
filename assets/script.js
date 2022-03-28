@@ -39,10 +39,16 @@ document.addEventListener("DOMContentLoaded", (event)=> {
 
     let setQuestionData = () => {
         queryElement("#quizHolder p").innerHTML = questions[qCount].title;
-        queryElement('#quizHolder button:nth-of-type(1)').innerHTML = `1. ${questions[qCount].choices[0]}`;
-		queryElement('#quizHolder button:nth-of-type(2)').innerHTML = `2. ${questions[qCount].choices[1]}`;
-		queryElement('#quizHolder button:nth-of-type(3)').innerHTML = `3. ${questions[qCount].choices[2]}`;
-		queryElement('#quizHolder button:nth-of-type(4)').innerHTML = `4. ${questions[qCount].choices[3]}`;
+        queryElement("#quizHolder button:nth-of-type(1)").innerHTML = `1. ${questions[qCount].choices[0]}`;
+		queryElement("#quizHolder button:nth-of-type(2)").innerHTML = `2. ${questions[qCount].choices[1]}`;
+		queryElement("#quizHolder button:nth-of-type(3)").innerHTML = `3. ${questions[qCount].choices[2]}`;
+		queryElement("#quizHolder button:nth-of-type(4)").innerHTML = `4. ${questions[qCount].choices[3]}`;
+        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `5. ${questions[qCount].choices[4]}`;
+        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `6. ${questions[qCount].choices[5]}`;
+        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `7. ${questions[qCount].choices[6]}`; 
+        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `8. ${questions[qCount].choices[7]}`;
+        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `9. ${questions[qCount].choices[8]}`;
+        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `10. ${questions[qCount].choices[9]}`;  
     }
 
     let quizUpdate = (answerCopy) => {
