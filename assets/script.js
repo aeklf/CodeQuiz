@@ -145,4 +145,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		onlyDisplaySection("#intro");
 	});
 
+	document.getElementById("#scoreStorageBtn").addEventListener("submit").function(e);{
+		if(!isValid){
+		e.preventDefault()};
+		localStorage = [];
+			alert("Thank You!")
+	}
+
 });
