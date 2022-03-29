@@ -124,13 +124,13 @@ document.addEventListener("DOMContentLoaded", (event)=> {
 		let initialsRecord = queryElement('#initials').value;
 		if (initialsRecord === ''){
 			queryElement('#errorIndicator p').innerHTML = "You need at least 1 character";
-			queryElement('#errorIndicator').classList.remove('invisible', errorIndicator());
+			queryElement('#errorIndicator').classList.remove("hidden", errorIndicator());
 		} else if (initialsRecord.match(/[[A-Za-z]/) === null) {
 			queryElement('#errorIndicator p').innerHTML = "Only letters for initials allowed.";
-			queryElement('#errorIndicator').classList.remove('invisible', errorIndicator());
+			queryElement('#errorIndicator').classList.remove("hidden", errorIndicator());
 		} else if (initialsRecord.length > 5) {
 			queryElement('#errorIndicator p').innerHTML = "Maximum of 5 characters allowed.";
-			queryElement('#errorIndicator').classList.remove('invisible', errorIndicator());
+			queryElement('#errorIndicator').classList.remove("hidden", errorIndicator());
 		} else {
 			recordsArray.push({
 				"initialRecord": initialsRecord,
