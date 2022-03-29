@@ -21,8 +21,8 @@ var questions = [
     },
     {
         title: "Inside which element to you link your javascript to your HTML file?",
-        choices: ["<script>", "<js>", "<javascript>", "<a>"],
-        answer: "<script>"
+        choices: ["script tag", "js tag", "javascript tag", "anchor tag"],
+        answer: "script tag"
     },
     {
         title: "How would you write something in an alert box?",
@@ -36,7 +36,7 @@ var questions = [
     },
     {
         title: "How do you add comments on javascript?",
-        choices: ["/* Comment */", "<!-- Comment -->", "'Comment'", "//Comment//"],
+        choices: ["/* Comment */", "! Comment !", "'Comment'", "//Comment//"],
         answer: "//Comment//"
     },
     {
