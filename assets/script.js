@@ -1,171 +1,117 @@
-document.addEventListener("DOMContentLoaded", (event)=> {
-    const initialTime = 100;
-    let time = 100;
-    let score = 0;
-    let qCount = 0;
-    let timeset;
-    let answers = document.querySelectorAll ("#quizHolder button");
-    let recordsArray = [];
-    (localStorage.getItem("recordsArray")) ? recordsArray = JSON.parse(localStorage.getItem("recordsArray"))
-: recordsArray = [];
-    let queryElement = (element) => {
-        return document.querySelector (element);
-    }
+document.addEventListener;
 
-    let onlyDisplaySection = (element) => {
-        let sections = document.querySelectorAll("section");
-        Array.from(sections).forEach((userItem) => {
-            userItem.classList.add("hide");
-        });
-        queryElement(element).classList.remove("hide");
-    }
+/* VARIABLE DECLARATION */
+var main = document.getElementsByTagName ("main") [0]
+var timeDisplay = document.getElementById("timeDisplay")
+var startQuizBtn = document.getElementById("startQuizBtn")
+var questionNumbers = document.getElementById("questionNumbers")
+var questionDisplay = document.getElementById("questionDisplay")
+var answersList = document.getElementById("answersList")
+var answerFeedback = document.getElementById("answerFeedback")
+var userScore = document.getElementById("userScore")
+var initialInput = document.getElementById("initialInput")
+var submitInitials = document.getElementById("submitInitials")
+var highScores = document.getElementById("highScores")
+var Reset = document.getElementById("Reset")
 
-    let recordsHtmlReset = () => {
-        queryElement("#highScores div").innerHTML = "";
-        var i = 1;
-        recordsArray.sort((a,b) => b.score - a.score);
-        Array.from(recordsArray).forEach(check =>
-            {
-                var scores = document.createElement("div");
-                scores.innerHTML = i + ". " + check.initialRecord + " - " + check.score;
-                queryElement('#highScores div').appendChild(scores);
-                i = i + 1
-            });
-            i = 0;
-            Array.from(answers).forEach(answer => {
-                answer.classList.remove("disable");
-            });
-    }
+/* QUESTIONS */
+const questions = [
+    {
+        title: "What role does javascript play in web pages?",
+        choices: ["structures pages", "gives pages their aesthetic layout", "enables interactive functions", "none of the above"],
+        answer: "enables interactive functions"
+    },
+    {
+        title: "Which of these case types isn't commonly used in javascript?",
+        choices: ["camelCase", "snake_case", "PascalCase", "nocase"],
+        answer: "snake_case"
+    },
+    {
+        title: "If you declare a variable (e. var name = Andrea) and later assign another value (e. name = Jason) which value will appear in the console log?",
+        choices: ["Andrea", "Jason", "Neither", "Both"],
+        answer: "Jason"
+    },
+    {
+        title: "Booleans, numbers and strings are all types of _.",
+        choices: ["Primitive Values", "Secondary Values", "JS Elements", "Variable IDs"],
+        answer: "Primitive Values"
+    },
+    {
+        title: "Inside which element to you link your javascript to your HTML file?",
+        choices: ["<script>", "<js>", "<javascript>", "<a>"],
+        answer: "<script>"
+    },
+    {
+        title: "How would you write something in an alert box?",
+        choices: ["alertBox()", "msg()", "alert()", "msgBox()"],
+        answer: "alert()"
+    },
+    {
+        title: "Which of the following is the correct format for functions?",
+        choices: ["function = myFunction", "function()", "function:myFunction()", "function myFunction()"],
+        answer: "function myFunction()"
+    },
+    {
+        title: "How do you add comments on javascript?",
+        choices: ["/* Comment */", "<!-- Comment -->", "'Comment'", "//Comment//"],
+        answer: "//Comment//"
+    },
+    {
+        title: "How do you declare a variable in javascript?",
+        choices: ["variable: Name;", "var=Name;", "var:Name;", "var Name;"],
+        answer: "var Name;"
+    },
+    {
+        title: "Which sign is used to assign value to a variable?",
+        choices: ["*", "-", "=", ":"],
+        answer: "="
+    },
+];
 
-    let setQuestionData = () => {
-        queryElement("#quizHolder p").innerHTML = questions[qCount].title;
-        queryElement("#quizHolder button:nth-of-type(1)").innerHTML = `1. ${questions[qCount].choices[0]}`;
-		queryElement("#quizHolder button:nth-of-type(2)").innerHTML = `2. ${questions[qCount].choices[1]}`;
-		queryElement("#quizHolder button:nth-of-type(3)").innerHTML = `3. ${questions[qCount].choices[2]}`;
-		queryElement("#quizHolder button:nth-of-type(4)").innerHTML = `4. ${questions[qCount].choices[3]}`;
-        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `5. ${questions[qCount].choices[4]}`;
-        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `6. ${questions[qCount].choices[5]}`;
-        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `7. ${questions[qCount].choices[6]}`; 
-        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `8. ${questions[qCount].choices[7]}`;
-        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `9. ${questions[qCount].choices[8]}`;
-        queryElement("#quizHolder button:nth-of-type(5)").innerHTML = `10. ${questions[qCount].choices[9]}`;  
-    }
+/* SCORES */
+const startingTime = questions.length * 10
+const timePenalty = 10
+var remainingTime
+var Timer
+var currentScore
 
-    let quizUpdate = (answerCopy) => {
-        queryElement("#userScore p").innerHTML = answerCopy;
-        queryElement("#userScore").classList.remove("hidden", userScore());
-        Array.from(answers).forEach(answer =>
-          { 
-              answer.classList.add("disable");
-          });
+/* QUIZ DEPLOYMENT */
 
-        setTimeout(() => {
-            if (qCount === questions.length) {
-                onlyDisplaySection("#finished");
-                time = 0;
-                queryElement("#time").innerHTML = time;
+function init() {
+    startQuizBtn.addEventListener("click", function(event){
+        event.preventDefault();
+        displayQuestionPage ();
+    })
+    answersList.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (event.target.matches("buton")) {
+            var button = event.target
+            if (button.classList.contains('correct')) {
+                answerFeedback.textContent = "Correct!"
+                questionNumbersBox.children[nextQuestionIndex - 1].classList.add('correct')
+                score++
             } else {
-                setQuestionData();
-                Array.from(answers).forEach(answer => {
-                    answer.classList.remove("disable");
-                });
+                answerFeedback.textContent = "Incorrect!"
+                questionNumbersBox.children[nextQuestionIndex - 1].classList.add('wrong')
+                remainingTime -= timePenalty
             }
-        }, 1000);
-
-    }
-
-    let myTimer = () => {
-        if (time > 0) {
-            time = time - 1;
-            queryElement("#time").innerHTML = time;
-        } else {
-            clearInterval(clock);
-            queryElement("#score").innerHTML = score;
-            onlyDisplaySection("#finished");
+            if (remainingTime > 0) displayNextQuestion()
+            else displayGetNamePage()
         }
-    }
-
-    let clock;
-    queryElement ("#intro button").addEventListener("click", (e) => {
-        setQuestionData();
-        onlyDisplaySection("#quizHolder");
-        clock = setInterval(myTimer, 1000);
-        });
-
-    let userScore = () => {
-        clearTimeout(timeset);
-        timeset = setTimeout(() => {
-            queryElement("#userScore").classList.add("hidden");
-        }, 1000);
-    }
-
-    Array.from(answers).forEach(check => {
-        check.addEventListener("click", function (event) {
-            if (this.innerHTML.substring(3, this.length) === questions [qCount].answer) {
-                score = score + 10;
-                qCount = qCount + 10;
-                quizUpdate("Correct!");
-            } else {
-                time = time - 10;
-                qCount = qCount - 10;
-                quizUpdate("Incorrect");
-            }
-        });
-    });
-
-    let errorIndicator = () => {
-        clearTimeout(timeset);
-        timeset = setTimeout(()=> {
-            queryElement ("#errorIndicator").classList.add("hidden");
-        }, 3000);
-    }
-
-    queryElement("#records button").addEventListener("click", () => {
-		let initialsRecord = queryElement('#initials').value;
-		if (initialsRecord === ''){
-			queryElement('#errorIndicator p').innerHTML = "You need at least 1 character";
-			queryElement('#errorIndicator').classList.remove("hidden", errorIndicator());
-		} else if (initialsRecord.match(/[[A-Za-z]/) === null) {
-			queryElement('#errorIndicator p').innerHTML = "Only letters for initials allowed.";
-			queryElement('#errorIndicator').classList.remove("hidden", errorIndicator());
-		} else if (initialsRecord.length > 5) {
-			queryElement('#errorIndicator p').innerHTML = "Maximum of 5 characters allowed.";
-			queryElement('#errorIndicator').classList.remove("hidden", errorIndicator());
-		} else {
-			recordsArray.push({
-				"initialRecord": initialsRecord,
-				"score": score
-			});
-			localStorage.setItem('recordsArray', JSON.stringify(recordsArray));
-			queryElement('#highScores div').innerHTML = '';
-			onlyDisplaySection("#highScores");
-			recordsHtmlReset();
-			queryElement("#initials").value = '';
+    })
+    submitInitialsButton.addEventListener("click", event => {
+        event.preventDefault()
+        let initials = initialsInput.value.toUpperCase()
+        if (initials) {
+            let highscores = JSON.parse(localStorage.getItem("highScores")) || []
+            
+            timestamp = Date.now()
+            highScores.push({
+                "timestamp": timestamp,
+                "score": score,
+                "initials": initials,
+                "timeRemaining": remainingTime
+            })
         }
-
-        queryElement("#reset").addEventListener("click", () => {
-            time = initialTime;
-            score = 0;
-            qCount = 0;
-            onlyDisplaySection("#intro");
-        });
-
-        queryElement("#reset").addEventListener("click", () => {
-            time = initialTime;
-            score = 0;
-            qCount = 0;
-            onlyDisplaySection("#intro");
-        });
-
-        queryElement("#scores").addEventListener("click", (e) => {
-            e.preventDefault();
-            clearInterval(clock);
-            queryElement('#time').innerHTML = 0;
-            time = initialTime;
-            score = 0;
-            qCount = 0;
-            onlyDisplaySection("#highScores");
-            recordsHtmlReset();
-        });
-});
-});
+    })
+}
