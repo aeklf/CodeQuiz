@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	queryElement("#clearScores").addEventListener("click", () => {
 		recordsArray = [];
 		queryElement('#highScores div').innerHTML = "";
-		localStorage.removeItem('recordsArray');
+		localStorage.removeItem("recordsArray");
 	});
 
 	queryElement("#reset").addEventListener("click", () => {
