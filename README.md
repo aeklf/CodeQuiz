@@ -13,3 +13,8 @@ the user will be presented with a question and upon completion with the next one
 Upon incorrect answers, time is substracted from the clock.
 When all the questions are answered or the timer reaches zero the game is over.
 When the game is over, score and user initials are saved.
+
+## Deployment
+
+You can view the finished webpage and take the quiz here: 
+https://aeklf.github.io/CodeQuiz/
