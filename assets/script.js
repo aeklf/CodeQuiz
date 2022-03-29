@@ -145,15 +145,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		onlyDisplaySection("#intro");
 	});
 
-	queryElement("#scores").addEventListener("click", (e) => {
-		e.preventDefault();
-		clearInterval(clock);
-		queryElement('#time').innerHTML = 0;
-		time = initialTime;
-		score = 0;
-		qCount = 0;
-		onlyDisplaySection("#highScores");
-		recordsHtmlReset();
-	});
-
 });

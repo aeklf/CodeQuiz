@@ -153,20 +153,7 @@ summary {
   display: block;
 }
 
-#highScores div div {
-  padding: 5px;
-  font-weight: 600;
-}
-
-#highScores div div:nth-child(odd) {
-  background-color: whitesmoke;
-}
-
-#highScores button {
-  margin: 5px;
-}
-
-#positionWrap {
+#pWrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -264,7 +251,7 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  #positionWrap {
+  #pWrap {
     min-height: calc(100% - 82px);
   }
 
